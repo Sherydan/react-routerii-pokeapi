@@ -10,7 +10,7 @@ const Details = () => {
   const [id, setId] = useState(null)
   const [poke, setPoke] = useState(null)
   
-  const onClick = () => {
+  const handleClick = () => {
     if (id) {
       navigate(`/pokemon/${id}`)
     } else {
@@ -23,10 +23,6 @@ const Details = () => {
     }
   }
 
-  const onChange = (e) => {
-    
-    setId(e.target.value)
-  }
 
   useEffect(() => {
     const details = async () => {
@@ -45,7 +41,7 @@ const Details = () => {
   return (
     <div className='select-container'>
       <h1>Select a Pokemon</h1>
-      <select name="pokemons" id="pokemons" onChange={onChange}>
+      <select name="pokemons" id="pokemons" onChange={(e) => setId(e.target.value)}>
         <option value="">Select One Pokemon</option>
         {poke?.results?.map((pokemon, i) => (
           <option key={pokemon.name} value={pokemon.name}>
@@ -54,7 +50,7 @@ const Details = () => {
         ))}
         
       </select>
-      <button id='details-button' onClick={onClick}>
+      <button id='details-button' onClick={handleClick}>
           View Details
       </button>
     </div>

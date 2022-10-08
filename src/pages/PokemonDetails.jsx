@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const PokemonDetails = () => {
@@ -9,9 +9,6 @@ const PokemonDetails = () => {
 
     useEffect(() => {
         const details = async () => {
-            // const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
-            // const data = await resp.json()
-            // setPokemon(data)
             try {
                 const response = await axios.get(
                     `https://pokeapi.co/api/v2/pokemon/${params.id}`
@@ -27,9 +24,6 @@ const PokemonDetails = () => {
         details();
     }, [params.id, navigate]);
 
-    const onClick = () => {
-        navigate(`/pokemon`);
-    };
 
     return (
         pokemon.name && (
@@ -64,10 +58,14 @@ const PokemonDetails = () => {
                         </p>
                     </div>
                 </div>
+                
+                <Link to="/pokemon">
+                    <button id="goback-button">
+                        Go Back
+                    </button>
+                </Link>
 
-                <button id="goback-button" onClick={onClick}>
-                    Go back
-                </button>
+                
             </div>
         )
 
